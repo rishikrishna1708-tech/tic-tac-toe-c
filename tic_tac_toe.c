@@ -1,5 +1,13 @@
 #include<stdio.h>
-char gameboard [3][3]={{'1','2','3'},{'4','5','6'},{'7','8','9'}};
+char gameboard [3][3];
+void reset() {
+    char ch = '1';
+    for(int i = 0; i < 3; i++) {
+        for(int j = 0; j < 3; j++) {
+            gameboard[i][j] = ch++;
+        }
+    }
+}
 void tacdisplay()
 {
      printf(" ---|---|---");printf("\n");
@@ -33,7 +41,11 @@ int winchk()
 }
 int main()
 {
+    char again;
+    do{
+        reset();
     int who=1;
+    int win=0;
     char track;
     for(int i=0;i<9;i++)
     {
@@ -65,12 +77,22 @@ int main()
     if(winchk())
     {
         tacdisplay();
-        printf("Player %d wins!!",who);
-        return 0;
+        printf("Player %d wins!!",who);win=1;
+        break;
     }
-    if(who==1)who=2;
-    else who=1;
+    if(who==1)
+    {who=2;}
+    else {
+    who=1;}
     
-} tacdisplay();
-printf("Game Draw");
-return 0;}
+} 
+if(win==0){tacdisplay();
+printf("Game Draw");}
+printf("Do you want to play again? (y/n): ");
+        scanf(" %c", &again);
+
+    } while(again == 'y' || again == 'Y');
+
+    printf("Thanks for playing!\n");
+    return 0;
+}
