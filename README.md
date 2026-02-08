@@ -19,7 +19,7 @@ This is a simple Tic Tac Toe game implemented using C programming language. It a
    gcc tic_tac_toe.c -o tic_tac_toe
 
 2. Run the program:
-   ./tic_tac_toe
+     tic_tac_toe.exe
 
 ## Author
 Rishi Krishna S
