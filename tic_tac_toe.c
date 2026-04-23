@@ -1,5 +1,6 @@
 #include<stdio.h>
 char gameboard [3][3];
+//Modular 1:
 void reset() {
     char ch = '1';
     for(int i = 0; i < 3; i++) {
@@ -8,6 +9,26 @@ void reset() {
         }
     }
 }
+//Modular 2;
+int checkDraw(int moves, int win)
+{
+    if(win == 0 && moves == 9)
+    {
+        return 1;
+    }
+    return 0;
+}
+//Modular 3:
+char playerTurn(int who) {
+    if(who==1) {
+        printf("Player 1 turn (X): Enter Position: ");
+        return 'X';
+    } else {
+        printf("Player 2 turn (O): Enter Position: ");
+        return 'O';
+    }
+}
+//Modular 4:  
 void tacdisplay()
 {
      printf(" ---|---|---");printf("\n");
@@ -24,6 +45,7 @@ void tacdisplay()
   }
 
 }
+//Modular 5:
 int winchk()
 {
     for(int i=0;i<3;i++) {
@@ -39,6 +61,11 @@ int winchk()
         
         return 0;
 }
+//Modular 6:
+int switchPlayer(int who)
+{
+return (who==1) ? 2 : 1;
+}
 int main()
 {
     char again;
@@ -47,17 +74,11 @@ int main()
     int who=1;
     int win=0;
     char track;
+    int moves =0;
     for(int i=0;i<9;i++)
     {
         tacdisplay();
-        if(who==1){
-            track='X';
-            printf("Player 1 turn(X):\nEnter Position:");
-        }
-        else{
-            track='O';
-            printf("Player 2 turn(O):\nEnter Position:");
-        }
+        track=playerTurn(who);
         int choice;
         scanf("%d",&choice);
         if(choice<1 || choice>9)
@@ -69,6 +90,7 @@ int main()
         if(gameboard[r][c]!='X'&& gameboard[r][c]!='O')
         {
             gameboard[r][c]=track;
+                moves=i+1;
         }
         else {
             printf("Error,Place already occupied");
@@ -80,14 +102,15 @@ int main()
         printf("Player %d wins!!",who);win=1;
         break;
     }
-    if(who==1)
-    {who=2;}
-    else {
-    who=1;}
+    who = switchPlayer(who);
     
 } 
-if(win==0){tacdisplay();
-printf("Game Draw");}
+if(checkDraw(moves, win))
+{
+    tacdisplay();
+    printf("Game Draw\n");
+}
+
 printf("Do you want to play again? (y/n): ");
         scanf(" %c", &again);
 
